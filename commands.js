@@ -4,6 +4,7 @@ var dateformat = require('dateformat')
 var spotify = new Spotify(keys.spotify)
 
 var axios = require('axios')
+var fs = require('fs')
 
 module.exports = {
   /**
@@ -43,7 +44,9 @@ module.exports = {
       }
     })
   },
-
+  /**
+   * Function that calls OMDB api to search by name of the movie
+   */
   movieThis: function (movieName) {
     var moviequeryUrl = `http://www.omdbapi.com/?apikey=b49cd7b5&t=${movieName}`
     axios.get(moviequeryUrl).then(
@@ -52,7 +55,7 @@ module.exports = {
         console.log(`Title of the movie : ${response.data.Title}`)
         console.log(`Year: ${response.data.Year}`)
         console.log(`IMDB Rating: ${response.data.imdbRating}`)
-        console.log(`Rating: ${response.data.Rated}`)
+        console.log(`Rotten Tomatoes Rating: ${response.data.Metascore}`)
         console.log(`Country where the movie was produced: ${response.data.Country}`)
         console.log(`Language of the movies: ${response.data.Language}`)
         console.log(`Plot: ${response.data.Plot}`)
@@ -60,5 +63,26 @@ module.exports = {
         console.log(`Actors: ${response.data.Actors}`)
       }
     )
+  },
+  
+  doWhatItSays: function () {
+    fs.readFile('random.txt', 'utf8', function (error, data) {
+      if (error) {
+        return console.log(error)
+      }
+      console.log(data)
+      var dataArr = data.split(',')
+      console.log(dataArr[0])
+      commandName = dataArr[0].trim()
+      commandValue = dataArr[1].trim()
+
+      if (commandName === 'concert-this') {
+        module.exports.concertThis(commandValue)
+      } else if (commandName === 'spotify-this-song') {
+        module.exports.spotifyThis(commandValue)
+      } else if (commandName === 'movie-this') {
+        module.exports.movieThis(commandValue)
+      }
+    })
   }
 }

@@ -23,4 +23,6 @@ if (commandName === 'concert-this') {
 } else if (commandName === 'movie-this') {
   // e.g node liri.js movie-this friends
   commands.movieThis(commandValue)
+} else if (commandName === 'do-what-it-says') {
+  commands.doWhatItSays()
 }
