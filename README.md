@@ -12,6 +12,7 @@ First of all you'll need to send requests using the `axios` package to the Bands
 ![Screenshot for movie-this](images/Movie-this.png)
 4. node liri.js do-what-it-says
 ![Screenshot for do-what-it-says](images/Do-what-it-says.png)
-5. ![Video gif](images/liri-video.gif)
+5. Video  
+![Video gif](images/liri-video.gif)
 
 
